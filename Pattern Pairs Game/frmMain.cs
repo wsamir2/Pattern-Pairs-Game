@@ -21,5 +21,15 @@ namespace Pattern_Pairs_Game
         {
 
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void disposeCardTimer_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
