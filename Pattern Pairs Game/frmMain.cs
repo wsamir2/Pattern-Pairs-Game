@@ -71,6 +71,25 @@ namespace Pattern_Pairs_Game
             numbers = Enumerable.Range(1, totalPairs).SelectMany(x => new List<int> { x, x }).ToList();
             pictures.Clear();
             this.Controls.OfType<PictureBox>().ToList().ForEach(p => this.Controls.Remove(p));
+            tableLayoutPanel.Controls.Clear();
+
+            tableLayoutPanel.RowCount = rows;
+            tableLayoutPanel.ColumnCount = columns;
+
+            tableLayoutPanel.RowStyles.Clear();
+            tableLayoutPanel.ColumnStyles.Clear();
+
+            for (int i = 0; i < rows; i++)
+            {
+                tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f / rows));
+            }
+
+            for (int i = 0; i < columns; i++)
+            {
+                tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / columns));
+            }
+            var randomList = numbers.OrderBy(x => Guid.NewGuid()).ToList();
+            numbers = randomList;
 
             for (int i = 0; i < rows; i++)
             {
@@ -82,10 +101,9 @@ namespace Pattern_Pairs_Game
                     newPic.BackColor = Color.LightGray;
                     newPic.SizeMode = PictureBoxSizeMode.StretchImage;
                     newPic.Click += NewPic_Click;
+                    newPic.Tag = numbers[i * columns + j].ToString();
                     pictures.Add(newPic);
-                    newPic.Left = leftPos + j * 60;
-                    newPic.Top = topPos + i * 60;
-                    this.Controls.Add(newPic);
+                    tableLayoutPanel.Controls.Add(newPic, j, i);
                 }
             }
             RestartGame();

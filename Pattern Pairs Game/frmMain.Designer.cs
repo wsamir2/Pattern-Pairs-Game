@@ -1,18 +1,19 @@
-﻿using System;
-
-namespace Pattern_Pairs_Game
+﻿namespace Pattern_Pairs_Game
 {
     partial class frmMain
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Timer disposeCardTimer;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblTimeLeft;
+        private System.Windows.Forms.Button btnRestartGame;
+        private System.Windows.Forms.NumericUpDown numericUpDownRows;
+        private System.Windows.Forms.NumericUpDown numericUpDownColumns;
+        private System.Windows.Forms.Label labelRows;
+        private System.Windows.Forms.Label labelColumns;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,12 +23,6 @@ namespace Pattern_Pairs_Game
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -41,6 +36,7 @@ namespace Pattern_Pairs_Game
             this.labelRows = new System.Windows.Forms.Label();
             this.labelColumns = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownColumns)).BeginInit();
             this.SuspendLayout();
@@ -48,12 +44,12 @@ namespace Pattern_Pairs_Game
             // disposeCardTimer
             // 
             this.disposeCardTimer.Interval = 1000;
-            this.disposeCardTimer.Tick += new EventHandler(TimerEvent);
+            this.disposeCardTimer.Tick += new System.EventHandler(this.TimerEvent);
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(33, 55);
+            this.lblStatus.Location = new System.Drawing.Point(20, 20);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(131, 16);
@@ -63,7 +59,7 @@ namespace Pattern_Pairs_Game
             // lblTimeLeft
             // 
             this.lblTimeLeft.AutoSize = true;
-            this.lblTimeLeft.Location = new System.Drawing.Point(373, 55);
+            this.lblTimeLeft.Location = new System.Drawing.Point(373, 20);
             this.lblTimeLeft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTimeLeft.Name = "lblTimeLeft";
             this.lblTimeLeft.Size = new System.Drawing.Size(144, 16);
@@ -73,7 +69,7 @@ namespace Pattern_Pairs_Game
             // btnRestartGame
             // 
             this.btnRestartGame.Image = ((System.Drawing.Image)(resources.GetObject("btnRestartGame.Image")));
-            this.btnRestartGame.Location = new System.Drawing.Point(226, 40);
+            this.btnRestartGame.Location = new System.Drawing.Point(707, 56);
             this.btnRestartGame.Margin = new System.Windows.Forms.Padding(4);
             this.btnRestartGame.Name = "btnRestartGame";
             this.btnRestartGame.Size = new System.Drawing.Size(55, 47);
@@ -83,32 +79,62 @@ namespace Pattern_Pairs_Game
             // 
             // numericUpDownRows
             // 
-            this.numericUpDownRows.Location = new System.Drawing.Point(76, 10);
+            this.numericUpDownRows.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownRows.Location = new System.Drawing.Point(76, 80);
             this.numericUpDownRows.Maximum = new decimal(new int[] {
             10,
+            0,
+            0,
+            0});
+            this.numericUpDownRows.Minimum = new decimal(new int[] {
+            2,
             0,
             0,
             0});
             this.numericUpDownRows.Name = "numericUpDownRows";
             this.numericUpDownRows.Size = new System.Drawing.Size(120, 22);
             this.numericUpDownRows.TabIndex = 3;
+            this.numericUpDownRows.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // numericUpDownColumns
             // 
-            this.numericUpDownColumns.Location = new System.Drawing.Point(285, 10);
+            this.numericUpDownColumns.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownColumns.Location = new System.Drawing.Point(285, 80);
             this.numericUpDownColumns.Maximum = new decimal(new int[] {
             10,
+            0,
+            0,
+            0});
+            this.numericUpDownColumns.Minimum = new decimal(new int[] {
+            2,
             0,
             0,
             0});
             this.numericUpDownColumns.Name = "numericUpDownColumns";
             this.numericUpDownColumns.Size = new System.Drawing.Size(120, 22);
             this.numericUpDownColumns.TabIndex = 4;
+            this.numericUpDownColumns.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // labelRows
             // 
             this.labelRows.AutoSize = true;
-            this.labelRows.Location = new System.Drawing.Point(12, 12);
+            this.labelRows.Location = new System.Drawing.Point(12, 80);
             this.labelRows.Name = "labelRows";
             this.labelRows.Size = new System.Drawing.Size(41, 16);
             this.labelRows.TabIndex = 5;
@@ -117,7 +143,7 @@ namespace Pattern_Pairs_Game
             // labelColumns
             // 
             this.labelColumns.AutoSize = true;
-            this.labelColumns.Location = new System.Drawing.Point(222, 12);
+            this.labelColumns.Location = new System.Drawing.Point(222, 80);
             this.labelColumns.Name = "labelColumns";
             this.labelColumns.Size = new System.Drawing.Size(59, 16);
             this.labelColumns.TabIndex = 6;
@@ -125,7 +151,7 @@ namespace Pattern_Pairs_Game
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(442, 10);
+            this.button1.Location = new System.Drawing.Point(442, 80);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
@@ -133,11 +159,29 @@ namespace Pattern_Pairs_Game
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.ColumnCount = 4;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.Location = new System.Drawing.Point(12, 120);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 4;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(760, 400);
+            this.tableLayoutPanel.TabIndex = 8;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 600);
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelRows);
             this.Controls.Add(this.labelColumns);
@@ -156,17 +200,5 @@ namespace Pattern_Pairs_Game
             this.PerformLayout();
 
         }
-
-        #endregion
-
-        private System.Windows.Forms.Timer disposeCardTimer;
-        private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Label lblTimeLeft;
-        private System.Windows.Forms.Button btnRestartGame;
-        private System.Windows.Forms.NumericUpDown numericUpDownRows;
-        private System.Windows.Forms.NumericUpDown numericUpDownColumns;
-        private System.Windows.Forms.Label labelRows;
-        private System.Windows.Forms.Label labelColumns;
-        private System.Windows.Forms.Button button1;
     }
 }
