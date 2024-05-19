@@ -27,7 +27,6 @@ namespace Pattern_Pairs_Game
         public frmMain()
         {
             InitializeComponent();
-            LoadPictures();
         }
         private void TimerEvent(object sender, EventArgs e)
         {
@@ -55,30 +54,38 @@ namespace Pattern_Pairs_Game
         private void LoadPictures()
         {
             int leftPos = 20;
-            int topPos = 20;
-            int rows = 0;
-            for (int i = 0; i < 16; i++)
+            int topPos = 80;
+            int rows = (int)numericUpDownRows.Value;
+            int columns = (int)numericUpDownColumns.Value;
+            if ((rows * columns) % 2 != 0)
             {
-                PictureBox newPic = new PictureBox();
-                newPic.Height = 50;
-                newPic.Width = 50;
-                newPic.BackColor = Color.LightGray;
-                newPic.SizeMode = PictureBoxSizeMode.StretchImage;
-                newPic.Click += NewPic_Click;
-                pictures.Add(newPic);
-                if (rows < 4)
+                MessageBox.Show("The number of cells must be even.", "Invalid Grid Size", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int totalPairs = rows * columns / 2;
+            if(totalPairs > 16)
+            {
+                MessageBox.Show("The Maximum allowed number of pairs is 16.", "Invalid Grid Size", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            numbers = Enumerable.Range(1, totalPairs).SelectMany(x => new List<int> { x, x }).ToList();
+            pictures.Clear();
+            this.Controls.OfType<PictureBox>().ToList().ForEach(p => this.Controls.Remove(p));
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
                 {
-                    rows++;
-                    newPic.Left = leftPos;
-                    newPic.Top = topPos;
+                    PictureBox newPic = new PictureBox();
+                    newPic.Height = 50;
+                    newPic.Width = 50;
+                    newPic.BackColor = Color.LightGray;
+                    newPic.SizeMode = PictureBoxSizeMode.StretchImage;
+                    newPic.Click += NewPic_Click;
+                    pictures.Add(newPic);
+                    newPic.Left = leftPos + j * 60;
+                    newPic.Top = topPos + i * 60;
                     this.Controls.Add(newPic);
-                    leftPos = leftPos + 60;
-                }
-                if (rows == 4)
-                {
-                    leftPos = 20;
-                    topPos += 60;
-                    rows = 0;
                 }
             }
             RestartGame();
@@ -172,6 +179,11 @@ namespace Pattern_Pairs_Game
         private void btnRestartGame_Click(object sender, EventArgs e)
         {
             RestartGame();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadPictures();
         }
     }
 }
