@@ -1,4 +1,6 @@
-﻿namespace Pattern_Pairs_Game
+﻿using System;
+
+namespace Pattern_Pairs_Game
 {
     partial class frmMain
     {
@@ -38,44 +40,50 @@
             // 
             // disposeCardTimer
             // 
-            this.disposeCardTimer.Interval = 750;
+            this.disposeCardTimer.Interval = 1000;
+            disposeCardTimer.Tick += new EventHandler(TimerEvent);
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(25, 282);
+            this.lblStatus.Location = new System.Drawing.Point(33, 347);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(35, 13);
+            this.lblStatus.Size = new System.Drawing.Size(44, 16);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "label1";
             // 
             // lblTimeLeft
             // 
             this.lblTimeLeft.AutoSize = true;
-            this.lblTimeLeft.Location = new System.Drawing.Point(230, 282);
+            this.lblTimeLeft.Location = new System.Drawing.Point(307, 347);
+            this.lblTimeLeft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTimeLeft.Name = "lblTimeLeft";
-            this.lblTimeLeft.Size = new System.Drawing.Size(35, 13);
+            this.lblTimeLeft.Size = new System.Drawing.Size(44, 16);
             this.lblTimeLeft.TabIndex = 1;
             this.lblTimeLeft.Text = "label2";
             // 
             // btnRestartGame
             // 
             this.btnRestartGame.Image = ((System.Drawing.Image)(resources.GetObject("btnRestartGame.Image")));
-            this.btnRestartGame.Location = new System.Drawing.Point(125, 272);
+            this.btnRestartGame.Location = new System.Drawing.Point(167, 335);
+            this.btnRestartGame.Margin = new System.Windows.Forms.Padding(4);
             this.btnRestartGame.Name = "btnRestartGame";
-            this.btnRestartGame.Size = new System.Drawing.Size(41, 38);
+            this.btnRestartGame.Size = new System.Drawing.Size(55, 47);
             this.btnRestartGame.TabIndex = 2;
             this.btnRestartGame.UseVisualStyleBackColor = true;
+            this.btnRestartGame.Click += new System.EventHandler(this.btnRestartGame_Click);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 315);
+            this.ClientSize = new System.Drawing.Size(417, 388);
             this.Controls.Add(this.btnRestartGame);
             this.Controls.Add(this.lblTimeLeft);
             this.Controls.Add(this.lblStatus);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.Text = "Pattern Pairs Game";
             this.ResumeLayout(false);

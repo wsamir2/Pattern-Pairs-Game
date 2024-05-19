@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,10 @@ namespace Pattern_Pairs_Game
         List<PictureBox> pictures = new List<PictureBox>();
         PictureBox picA;
         PictureBox picB;
-        int totalTime = 30;
+        int totalTime = 120;
         int countDownTime;
         bool gameOver = false;
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         public frmMain()
         {
             InitializeComponent();
@@ -30,15 +32,18 @@ namespace Pattern_Pairs_Game
         private void TimerEvent(object sender, EventArgs e)
         {
             countDownTime--;
-            lblTimeLeft.Text = "Time Left: " + countDownTime;
-            if (countDownTime < 1)
+            lblTimeLeft.Text = "Time Left: " + countDownTime + " seconds";
+            if (countDownTime <= 0)
             {
                 GameOver("Times Up, You Lose");
+                // Navigate up to the project directory from the bin\Debug\netcoreappX.X directory
+                string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.FullName;
                 foreach (PictureBox x in pictures)
                 {
                     if (x.Tag != null)
                     {
-                        x.Image = Image.FromFile("pics/" + (string)x.Tag + ".png");
+                        string imagePath = Path.Combine(projectDirectory, "images", picA.Tag + ".png");
+                        x.Image = Image.FromFile(imagePath);
                     }
                 }
             }
@@ -85,12 +90,15 @@ namespace Pattern_Pairs_Game
                 // dont register a click if the game is over
                 return;
             }
+            // Navigate up to the project directory from the bin\Debug\netcoreappX.X directory
+            string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.FullName;
             if (firstChoice == null)
             {
                 picA = sender as PictureBox;
                 if (picA.Tag != null && picA.Image == null)
                 {
-                    picA.Image = Image.FromFile("images/" + (string)picA.Tag + ".png");
+                    string imagePath = Path.Combine(projectDirectory, "images", picA.Tag + ".png");
+                    picA.Image = Image.FromFile(imagePath);
                     firstChoice = (string)picA.Tag;
                 }
             }
@@ -99,7 +107,8 @@ namespace Pattern_Pairs_Game
                 picB = sender as PictureBox;
                 if (picB.Tag != null && picB.Image == null)
                 {
-                    picB.Image = Image.FromFile("images/" + (string)picB.Tag + ".png");
+                    string imagePath = Path.Combine(projectDirectory, "images", picB.Tag + ".png");
+                    picB.Image = Image.FromFile(imagePath);
                     secondChoice = (string)picB.Tag;
                 }
             }
@@ -158,6 +167,11 @@ namespace Pattern_Pairs_Game
              disposeCardTimer.Stop();
             gameOver = true;
             MessageBox.Show(msg + " Click Restart to Play Again.", "Walid Team Sayes: ");
+        }
+
+        private void btnRestartGame_Click(object sender, EventArgs e)
+        {
+            RestartGame();
         }
     }
 }
