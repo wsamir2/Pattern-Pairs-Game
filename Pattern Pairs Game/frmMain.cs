@@ -32,19 +32,9 @@ namespace Pattern_Pairs_Game
         {
             countDownTime--;
             lblTimeLeft.Text = "Time Left: " + countDownTime + " seconds";
-            if (countDownTime <= 0)
+            if (countDownTime == 0)
             {
                 GameOver("Times Up, You Lose");
-                // Navigate up to the project directory from the bin\Debug\netcoreappX.X directory
-                string projectDirectory = Directory.GetParent(baseDirectory).Parent.Parent.FullName;
-                foreach (PictureBox x in pictures)
-                {
-                    if (x.Tag != null)
-                    {
-                        string imagePath = Path.Combine(projectDirectory, "images", picA.Tag + ".png");
-                        x.Image = Image.FromFile(imagePath);
-                    }
-                }
             }
         }
         private void RestartGameEvent(object sender, EventArgs e)
@@ -53,8 +43,6 @@ namespace Pattern_Pairs_Game
         }
         private void LoadPictures()
         {
-            int leftPos = 20;
-            int topPos = 80;
             int rows = (int)numericUpDownRows.Value;
             int columns = (int)numericUpDownColumns.Value;
             if ((rows * columns) % 2 != 0)
@@ -191,7 +179,7 @@ namespace Pattern_Pairs_Game
         {
              disposeCardTimer.Stop();
             gameOver = true;
-            MessageBox.Show(msg + " Click Restart to Play Again.", "Walid Team Sayes: ");
+            MessageBox.Show(msg + " Click Restart to Play Again.", "");
         }
 
         private void btnRestartGame_Click(object sender, EventArgs e)
