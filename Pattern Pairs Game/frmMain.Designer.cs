@@ -4,6 +4,7 @@
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Timer disposeCardTimer;
+        private System.Windows.Forms.Timer checkCompletionTimer;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblTimeLeft;
         private System.Windows.Forms.Button btnRestartGame;
@@ -31,6 +32,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.disposeCardTimer = new System.Windows.Forms.Timer(this.components);
+            this.checkCompletionTimer = new System.Windows.Forms.Timer(this.components);
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblTimeLeft = new System.Windows.Forms.Label();
             this.btnRestartGame = new System.Windows.Forms.Button();
@@ -54,6 +56,11 @@
             // 
             this.disposeCardTimer.Interval = 1000;
             this.disposeCardTimer.Tick += new System.EventHandler(this.TimerEvent);
+            // 
+            // checkCompletionTimer
+            // 
+            this.checkCompletionTimer.Interval = 500;
+            this.checkCompletionTimer.Tick += new System.EventHandler(this.CheckForCompletionEvent);
             // 
             // lblStatus
             // 

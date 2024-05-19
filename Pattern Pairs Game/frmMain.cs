@@ -24,9 +24,12 @@ namespace Pattern_Pairs_Game
         int countDownTime;
         bool gameOver = false;
         string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        Timer mismatchTimer = new Timer();
         public frmMain()
         {
             InitializeComponent();
+            mismatchTimer.Interval = 1000;
+            mismatchTimer.Tick += MismatchTimer_Tick;
         }
         private void TimerEvent(object sender, EventArgs e)
         {
@@ -36,6 +39,11 @@ namespace Pattern_Pairs_Game
             {
                 GameOver("Times Up, You Lose");
             }
+        }
+
+        private void CheckForCompletionEvent(object sender, EventArgs e)
+        {
+            CheckForCompletion();
         }
         private void RestartGameEvent(object sender, EventArgs e)
         {
@@ -123,11 +131,8 @@ namespace Pattern_Pairs_Game
                     string imagePath = Path.Combine(projectDirectory, "images", picB.Tag + ".png");
                     picB.Image = Image.FromFile(imagePath);
                     secondChoice = (string)picB.Tag;
+                    CheckPictures(picA, picB);
                 }
-            }
-            else
-            {
-                CheckPictures(picA, picB);
             }
         }
         private void RestartGame()
@@ -146,6 +151,7 @@ namespace Pattern_Pairs_Game
             lblTimeLeft.Text = "Time Left: " + totalTime;
             gameOver = false;
             disposeCardTimer.Start();
+            checkCompletionTimer.Start();
             countDownTime = totalTime;
         }
         private void CheckPictures(PictureBox A, PictureBox B)
@@ -159,25 +165,44 @@ namespace Pattern_Pairs_Game
             {
                 tries++;
                 lblStatus.Text = "Mismatched " + tries + " times.";
+                mismatchTimer.Start();
             }
             firstChoice = null;
             secondChoice = null;
-            foreach (PictureBox pics in pictures.ToList())
+        }
+
+        private void MismatchTimer_Tick(object sender, EventArgs e)
+        {
+            // Stop the timer
+            mismatchTimer.Stop();
+
+            // Flip the cards back over
+            if (picA != null && picA.Tag != null)
             {
-                if (pics.Tag != null)
-                {
-                    pics.Image = null;
-                }
+                picA.Image = null;
             }
-            // now lets check if all of the items have been solved
-            if (pictures.All(o => o.Tag == pictures[0].Tag))
+            if (picB != null && picB.Tag != null)
+            {
+                picB.Image = null;
+            }
+
+            // Reset the selected pictures
+            picA = null;
+            picB = null;
+        }
+
+        private void CheckForCompletion()
+        {
+            // Check if all tags are null (indicating all pairs are matched)
+            if (pictures.All(p => p.Tag == null))
             {
                 GameOver("Great Work, You Win!!!!");
             }
         }
         private void GameOver(string msg)
         {
-             disposeCardTimer.Stop();
+            disposeCardTimer.Stop();
+            checkCompletionTimer.Stop();
             gameOver = true;
             MessageBox.Show(msg + " Click Restart to Play Again.", "");
         }
