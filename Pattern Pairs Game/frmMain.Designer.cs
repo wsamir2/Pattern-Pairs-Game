@@ -208,6 +208,7 @@
             // 
             // logoPictureBox
             // 
+            this.logoPictureBox.BackColor = System.Drawing.Color.LightBlue;
             this.logoPictureBox.Location = new System.Drawing.Point(530, 0);
             this.logoPictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.logoPictureBox.Name = "logoPictureBox";
