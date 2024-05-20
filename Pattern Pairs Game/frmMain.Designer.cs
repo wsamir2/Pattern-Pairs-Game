@@ -17,6 +17,8 @@
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Panel footerPanel;
         private System.Windows.Forms.PictureBox logoPictureBox;
+        private System.Windows.Forms.Label TimerInSeconds;
+        private System.Windows.Forms.NumericUpDown numericUpDownTimer;
 
         protected override void Dispose(bool disposing)
         {
@@ -42,14 +44,18 @@
             this.labelColumns = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.TimerInSeconds = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.footerPanel = new System.Windows.Forms.Panel();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.numericUpDownTimer = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownColumns)).BeginInit();
+            this.tableLayoutPanel.SuspendLayout();
             this.headerPanel.SuspendLayout();
             this.footerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimer)).BeginInit();
             this.SuspendLayout();
             // 
             // disposeCardTimer
@@ -100,8 +106,8 @@
             // numericUpDownRows
             // 
             this.numericUpDownRows.Location = new System.Drawing.Point(76, 80);
-            this.numericUpDownRows.Maximum = new decimal(new int[] {
-            10,
+            this.numericUpDownRows.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -109,7 +115,7 @@
             this.numericUpDownRows.Size = new System.Drawing.Size(120, 22);
             this.numericUpDownRows.TabIndex = 3;
             this.numericUpDownRows.Value = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
@@ -117,19 +123,14 @@
             // numericUpDownColumns
             // 
             this.numericUpDownColumns.Location = new System.Drawing.Point(319, 78);
-            this.numericUpDownColumns.Maximum = new decimal(new int[] {
-            10,
+            this.numericUpDownColumns.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.numericUpDownColumns.Name = "numericUpDownColumns";
             this.numericUpDownColumns.Size = new System.Drawing.Size(120, 22);
             this.numericUpDownColumns.TabIndex = 4;
-            this.numericUpDownColumns.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
             // 
             // labelRows
             // 
@@ -169,6 +170,7 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.Controls.Add(this.TimerInSeconds, 2, 0);
             this.tableLayoutPanel.Location = new System.Drawing.Point(12, 108);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 4;
@@ -178,6 +180,16 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(760, 400);
             this.tableLayoutPanel.TabIndex = 8;
+            // 
+            // TimerInSeconds
+            // 
+            this.TimerInSeconds.AutoSize = true;
+            this.TimerInSeconds.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.TimerInSeconds.Location = new System.Drawing.Point(383, 0);
+            this.TimerInSeconds.Name = "TimerInSeconds";
+            this.TimerInSeconds.Size = new System.Drawing.Size(178, 40);
+            this.TimerInSeconds.TabIndex = 13;
+            this.TimerInSeconds.Text = "Enter timeout value in seconds";
             // 
             // headerPanel
             // 
@@ -210,11 +222,24 @@
             this.logoPictureBox.TabIndex = 11;
             this.logoPictureBox.TabStop = false;
             // 
+            // numericUpDownTimer
+            // 
+            this.numericUpDownTimer.Location = new System.Drawing.Point(599, 78);
+            this.numericUpDownTimer.Name = "numericUpDownTimer";
+            this.numericUpDownTimer.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDownTimer.TabIndex = 12;
+            this.numericUpDownTimer.Minimum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.numericUpDownTimer);
             this.Controls.Add(this.logoPictureBox);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.labelRows);
@@ -229,13 +254,18 @@
             this.Text = "Pattern Pairs Game";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownColumns)).EndInit();
+            this.tableLayoutPanel.ResumeLayout(false);
+            this.tableLayoutPanel.PerformLayout();
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
             this.footerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+
     }
 }
