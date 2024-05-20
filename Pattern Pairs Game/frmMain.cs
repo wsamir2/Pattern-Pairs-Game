@@ -58,6 +58,11 @@ namespace Pattern_Pairs_Game
                 MessageBox.Show("The number of cells must be even.", "Invalid Grid Size", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (rows * columns == 2)
+            {
+                MessageBox.Show("This is a trivial case, Number of blocks should be 4 or more.", "Trivial Case", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             int totalPairs = rows * columns / 2;
             if(totalPairs > 16)
             {
