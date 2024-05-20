@@ -20,7 +20,7 @@ namespace Pattern_Pairs_Game
         List<PictureBox> pictures = new List<PictureBox>();
         PictureBox picA;
         PictureBox picB;
-        int totalTime = 120;
+        int totalTime;
         int countDownTime;
         bool gameOver = false;
         string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -214,7 +214,13 @@ namespace Pattern_Pairs_Game
 
         private void button1_Click(object sender, EventArgs e)
         {
+            SetTimeOutValue();
             LoadPictures();
+        }
+
+        private void SetTimeOutValue()
+        {
+            totalTime = ((int)numericUpDownTimer.Value)*60;
         }
     }
 }
